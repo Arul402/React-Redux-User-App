@@ -4,6 +4,8 @@ import Home from './components/Home'
 import AddUser from './components/AddUser'
 import Users from './components/Users'
 import Navbar from './components/Navbar'
+import AddStudent from './components/AddStudent'
+import Students from './components/Students'
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path='/adduser' element={<AddUser/>}/>
         <Route path='/users' element={<Users/>}/>
+        <Route path='/addstudent' element={<AddStudent/>}/>
+        <Route path='/students' element={<Students/>}/>
       </Routes>
     </Router>
     

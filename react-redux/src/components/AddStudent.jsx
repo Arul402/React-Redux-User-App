@@ -1,47 +1,41 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { addUser } from "../slices/userSlices";
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { Bounce, ToastContainer, toast } from "react-toastify";
-import {useNavigate} from 'react-router-dom'
+import { addStudent } from '../slices/studentSlices';
+import { useNavigate } from 'react-router-dom';
 
-function AddUser() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    age: "",
-    phone: "",
-    address: "",
-  });
-   const navigate = useNavigate();
-  const dispatch = useDispatch();
-//   useEffect(() => {
-//     const timer = setTimeout(() => {
-//       navigate('/users');
-//     }, 2000); 
+function AddStudent() {
+    const [formData,setFormData]=useState({
+        name:"",
+        email:"",
+        rollnumber:"",
+        department:"",
+        degree:"",
+        college:"",
+        address:""
+    });
+    const dispatch =useDispatch();
+    const navigate=useNavigate();
 
-//     return () => clearTimeout(timer); 
-//   }, [navigate]);
+    function handleChange(e) {
+        const {name,value}=e.target;
+        setFormData((prev)=>({
+            ...prev,
+            [name]:value
+        }))
+    }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value, // Why using [name]:value ? because then only it set the values to the particular name property or else if we given like name:value it will store all the input values to the name field only
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Submitted:", formData);
-    toast.success("User Added !");
-    dispatch(addUser(formData)); // passing the data to the store syntax : "dispatch(action(payload))"
-    setTimeout(() => {
-      navigate('/users');
-    }, 3000); 
-  };
+    function handleSubmit(e) {
+        e.preventDefault();
+        toast.success("Student Added !");
+        dispatch(addStudent(formData));
+        setTimeout(()=>{
+            navigate("/students")
+        },3000)
+    }
 
   return (
-    <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-md">
+     <div className="max-w-xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-md">
       <ToastContainer
         position="top-right"
         autoClose={3000}
@@ -56,7 +50,7 @@ function AddUser() {
         transition={Bounce}
       />
       <h2 className="text-2xl font-bold text-blue-900 mb-6 text-center">
-        Add New User
+        Add New Student Info
       </h2>
       {/*  Here Used Controlled Form beacuse i have seted the value for the state (i.e formData)  */}
       <form onSubmit={handleSubmit} className="space-y-5"> 
@@ -85,24 +79,46 @@ function AddUser() {
         </div>
 
         <div>
-          <label className="block mb-1 font-medium">Age</label>
+          <label className="block mb-1 font-medium">Roll Number</label>
           <input
-            type="number"
-            name="age"
+            type="text"
+            name="rollnumber"
             className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={formData.age}
+            value={formData.rollnumber}
             onChange={handleChange}
             required
           />
         </div>
 
         <div>
-          <label className="block mb-1 font-medium">Phone Number</label>
+          <label className="block mb-1 font-medium">Department</label>
           <input
-            type="tel"
-            name="phone"
+            type="text"
+            name="department"
             className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={formData.phone}
+            value={formData.department}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label className="block mb-1 font-medium">Degree</label>
+          <input
+            type="text"
+            name="degree"
+            className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={formData.degree}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label className="block mb-1 font-medium">College</label>
+          <input
+            type="text"
+            name="college"
+            className="w-full border border-gray-300 px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            value={formData.college}
             onChange={handleChange}
             required
           />
@@ -128,7 +144,7 @@ function AddUser() {
         </button>
       </form>
     </div>
-  );
+  )
 }
 
-export default AddUser;
+export default AddStudent

@@ -6,7 +6,7 @@ import {useNavigate} from 'react-router-dom'
 
 
 function Users() {
-const users = useSelector((state)=>state.userInfo.users)
+const users = useSelector((state)=>state.userInfo.users)// here the state represents the reducer in the store. users is from the slice -> initialState's object -> user.
 const dispatch = useDispatch()
 const navigate=useNavigate()
 

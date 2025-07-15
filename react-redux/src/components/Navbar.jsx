@@ -4,6 +4,7 @@ import {useSelector} from 'react-redux'
 
 const Navbar = () => {
     const users = useSelector((state)=>state.userInfo.users)
+    const students=useSelector((state)=>state.studentInfo.students)
 
   return (
     <nav className="bg-blue-900 text-white p-4 shadow-md">
@@ -16,12 +17,26 @@ const Navbar = () => {
           <li>
             <Link to="/adduser" className="hover:text-blue-300">Add User</Link>
           </li>
+          <li>
+            <Link to="/addstudent" className="hover:text-blue-300">Add Student</Link>
+          </li>
           <li className="relative">
   <Link to="/users" className="hover:text-blue-300 relative inline-block">
     Users
     {users && users.length > 0 && (
       <span className="absolute -top-2 -right-4 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
         {users.length}
+      </span>
+    )}
+  </Link>
+</li>
+
+    <li className="relative">
+  <Link to="/students" className="hover:text-blue-300 relative inline-block">
+    Students
+    {students && students.length > 0 && (
+      <span className="absolute -top-2 -right-4 bg-red-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+        {students.length}
       </span>
     )}
   </Link>
